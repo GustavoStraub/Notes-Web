@@ -1,10 +1,10 @@
 import React from 'react'
-import Login from '../Components/Login'
+import styled from 'styled-components'
 
 export default function index() {
   return (
     <div>
-      <Login />
+      
     </div>
   )
 }

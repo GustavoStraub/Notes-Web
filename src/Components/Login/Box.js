@@ -1,10 +1,8 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import styled from 'styled-components'
 import { useQuery, useApolloClient } from 'react-apollo'
 import Login from '../../Graphql/Login'
 import Router from 'next/router'
-import ApolloClient from 'apollo-boost';
-import gql from "graphql-tag";
 
 const Wrapper = styled.div`
 background: #333232;
@@ -70,29 +68,40 @@ font-size: 0.8em;
 export default function Box() {
   const apolloClient = useApolloClient()
 
+  const [ErrorMsg, setError] = useState()
   const [Email, setEmail] = useState("")
   const [Password, setPassword] = useState("")
+  const [state, setState] = useState()
 
-  function User() {
-    apolloClient.query({ query: Login,
-       variables: { email: Email, password: Password } })
-      .then(res => console.log(res.data))
+  const User = async () => {
+    setError(null)
+    await apolloClient.query({
+      query: Login,
+      variables: { email: Email, password: Password }
+    })
+      .then(res => {
+        setState(res.data)
+      })
+      .catch(e => setError(e))
   }
 
-  function SubmitForm(e) {
+  const SubmitForm = (e) => {
     e.preventDefault()
     User()
-    // Router.push('/login')
+    console.log(">>", state)
+    if (state) {
+      Router.push('/home')
+    }
   }
 
 
   return (
     <Wrapper>
       <Title>Login</Title>
-      {/* {error && error.graphQLErrors.map(({ message }, i) => (
-        <Error key={i}>{message}*</Error>))} */}
+      {ErrorMsg && ErrorMsg.graphQLErrors.map(({ message }, i) => (
+        <Error key={i}>{message}*</Error>))}
       <Form onSubmit={SubmitForm}>
-        <Input onChange={e => setEmail(e.target.value)} type="email" placeholder="Email" required />
+        <Input onChange={e => setEmail(e.target.value.toLowerCase())} type="email" placeholder="Email" required />
         <Input onChange={e => setPassword(e.target.value)} type="password" placeholder="Password" required />
         <Button type="submit">Login</Button>
       </Form>

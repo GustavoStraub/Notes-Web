@@ -52,7 +52,7 @@ border: 2px solid #4d4175;
 outline: none;
 `
 const Error = styled.span`
-color: #c91010;
+color: #c73434;
 margin-bottom: 2%;
 `
 export default function Box() {

@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import styled from 'styled-components'
-import { useMutation } from 'react-apollo'
-import AddUser from '../../Graphql/AddUser'
+import { useQuery } from 'react-apollo'
+import Login from '../../Graphql/Login'
 import Router from 'next/router'
 
 const Wrapper = styled.div`
@@ -67,37 +67,34 @@ font-size: 0.8em;
 `
 export default function Box() {
 
-  const [UserData, { error }] = useMutation(AddUser, { errorPolicy: 'all' })
 
-
-  const [Name, setName] = useState("")
   const [Email, setEmail] = useState("")
   const [Password, setPassword] = useState("")
 
+ function User() {
+    const { data, error, loading } = useQuery(Login, {
+      variables: { email: Email, password: Password }
+    })
+  }
+
   function SubmitForm(e) {
     e.preventDefault()
-    UserData({
-      variables: {
-        name: Name,
-        email: Email,
-        password: Password
-      }
-    })
-    Router.push('/login')
+    User()
+    // Router.push('/login')
   }
+
 
   return (
     <Wrapper>
-      <Title>Create Account</Title>
-      {error && error.graphQLErrors.map(({ message }, i) => (
-        <Error key={i}>{message}*</Error>))}
+      <Title>Login</Title>
+      {/* {error && error.graphQLErrors.map(({ message }, i) => (
+        <Error key={i}>{message}*</Error>))} */}
       <Form onSubmit={SubmitForm}>
-        <Input onChange={e => setName(e.target.value)} type="text" placeholder="Name" required />
         <Input onChange={e => setEmail(e.target.value)} type="email" placeholder="Email" required />
         <Input onChange={e => setPassword(e.target.value)} type="password" placeholder="Password" required />
-        <Button type="submit">Create Account</Button>
+        <Button type="submit">Login</Button>
       </Form>
-      <P onClick={() => Router.push('/login')}>Has an account? Login here</P>
+      <P onClick={() => Router.push('/index')}>Don't have an account? Create one here</P>
     </Wrapper>
   )
 }

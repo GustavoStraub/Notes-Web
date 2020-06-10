@@ -1,8 +1,10 @@
 import React, { useState } from 'react'
 import styled from 'styled-components'
-import { useQuery } from 'react-apollo'
+import { useQuery, useApolloClient } from 'react-apollo'
 import Login from '../../Graphql/Login'
 import Router from 'next/router'
+import ApolloClient from 'apollo-boost';
+import gql from "graphql-tag";
 
 const Wrapper = styled.div`
 background: #333232;
@@ -66,15 +68,15 @@ font-style: italic;
 font-size: 0.8em;
 `
 export default function Box() {
-
+  const apolloClient = useApolloClient()
 
   const [Email, setEmail] = useState("")
   const [Password, setPassword] = useState("")
 
- function User() {
-    const { data, error, loading } = useQuery(Login, {
-      variables: { email: Email, password: Password }
-    })
+  function User() {
+    apolloClient.query({ query: Login,
+       variables: { email: Email, password: Password } })
+      .then(res => console.log(res.data))
   }
 
   function SubmitForm(e) {

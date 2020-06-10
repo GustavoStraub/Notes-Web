@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import styled from 'styled-components'
 import { useMutation } from 'react-apollo'
 import AddUser from '../../Graphql/AddUser'
+import Router from 'next/router'
 
 const Wrapper = styled.div`
 background: #333232;
@@ -15,6 +16,7 @@ align-items: center;
 const Title = styled.h2`
 color: rgba(255,255,255,0.8);
 margin-bottom: 10%;
+text-shadow: 2px 2px black;
 `
 const Form = styled.form`
 display: flex;
@@ -55,6 +57,14 @@ const Error = styled.span`
 color: #c73434;
 margin-bottom: 2%;
 `
+const P = styled.p`
+color: rgba(255,255,255,0.7);
+margin-top: 5%;
+cursor: pointer;
+text-decoration: underline;
+font-style: italic;
+font-size: 0.8em;
+`
 export default function Box() {
 
   const [UserData, { error }] = useMutation(AddUser, { errorPolicy: 'all' })
@@ -73,12 +83,13 @@ export default function Box() {
         password: Password
       }
     })
+    Router.push('/home')
   }
 
   return (
     <Wrapper>
       <Title>Create Account</Title>
-       {error && error.graphQLErrors.map(({ message }, i) => (
+      {error && error.graphQLErrors.map(({ message }, i) => (
         <Error key={i}>{message}*</Error>))}
       <Form onSubmit={SubmitForm}>
         <Input onChange={e => setName(e.target.value)} type="text" placeholder="Name" required />
@@ -86,6 +97,7 @@ export default function Box() {
         <Input onChange={e => setPassword(e.target.value)} type="password" placeholder="Password" required />
         <Button type="submit">Create Account</Button>
       </Form>
+      <P onClick={() => Router.push('/login')}>Has an account? Login here</P>
     </Wrapper>
   )
 }

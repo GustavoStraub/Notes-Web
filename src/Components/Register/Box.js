@@ -51,7 +51,10 @@ cursor: pointer;
 border: 2px solid #4d4175;
 outline: none;
 `
-
+const Error = styled.span`
+color: #c91010;
+margin-bottom: 2%;
+`
 export default function Box() {
 
   const [UserData, { error }] = useMutation(AddUser, { errorPolicy: 'all' })
@@ -75,7 +78,8 @@ export default function Box() {
   return (
     <Wrapper>
       <Title>Create Account</Title>
-       
+       {error && error.graphQLErrors.map(({ message }, i) => (
+        <Error key={i}>{message}*</Error>))}
       <Form onSubmit={SubmitForm}>
         <Input onChange={e => setName(e.target.value)} type="text" placeholder="Name" required />
         <Input onChange={e => setEmail(e.target.value)} type="email" placeholder="Email" required />

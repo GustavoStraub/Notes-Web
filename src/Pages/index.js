@@ -1,10 +1,10 @@
 import React from 'react'
-import Login from '../Components/Login'
+import Register from '../Components/Register'
 
 export default function index() {
   return (
     <div>
-      <Login />
+      <Register />
     </div>
   )
 }

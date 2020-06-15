@@ -8,6 +8,7 @@ export default function Token({ children }) {
   if (Token) {
     localStorage.setItem('token', Token.token)
     console.log(localStorage.getItem('token'))
+    console.log(Token)
   }
 
   return (

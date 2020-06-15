@@ -93,7 +93,7 @@ export default function Box() {
         <Error key={i}>{message}*</Error>))}
       <Form onSubmit={SubmitForm}>
         <Input onChange={e => setName(e.target.value)} type="text" placeholder="Name" required />
-        <Input onChange={e => setEmail(e.target.value)} type="email" placeholder="Email" required />
+        <Input onChange={e => setEmail(e.target.value.toLowerCase())} type="email" placeholder="Email" required />
         <Input onChange={e => setPassword(e.target.value)} type="password" placeholder="Password" required />
         <Button type="submit">Create Account</Button>
       </Form>

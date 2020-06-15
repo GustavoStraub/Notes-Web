@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react'
+import React, { useState, useContext, useEffect, useRef } from 'react'
 import styled from 'styled-components'
 import { useQuery, useApolloClient } from 'react-apollo'
 import Login from '../../Graphql/Login'
@@ -67,6 +67,11 @@ font-style: italic;
 font-size: 0.8em;
 `
 export default function Box() {
+
+  useEffect(() => {
+    localStorage.removeItem('token')
+  }, [])
+
   const apolloClient = useApolloClient()
 
   const [ErrorMsg, setError] = useState()
@@ -82,18 +87,21 @@ export default function Box() {
       variables: { email: Email, password: Password }
     })
       .then(res => {
-        console.log(res.data.Login.token)
+        setToken(res.data.Login)
       })
       .catch(e => setError(e))
   }
 
+
+  useEffect(() => {
+    if (Token) {
+      Router.push('/home')
+    }
+  }, [Token])
+
   const SubmitForm = (e) => {
     e.preventDefault()
     User()
-    // console.log(">>", Token)
-    if (state) {
-      // Router.push('/home')
-    }
   }
 
 

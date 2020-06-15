@@ -1,8 +1,9 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useContext } from 'react'
 import styled from 'styled-components'
 import { useQuery, useApolloClient } from 'react-apollo'
 import Login from '../../Graphql/Login'
 import Router from 'next/router'
+import { TokenContext } from '../Context/Token'
 
 const Wrapper = styled.div`
 background: #333232;
@@ -72,6 +73,7 @@ export default function Box() {
   const [Email, setEmail] = useState("")
   const [Password, setPassword] = useState("")
   const [state, setState] = useState()
+  const [Token, setToken] = useContext(TokenContext)
 
   const User = async () => {
     setError(null)
@@ -80,7 +82,7 @@ export default function Box() {
       variables: { email: Email, password: Password }
     })
       .then(res => {
-        setState(res.data)
+        console.log(res.data.Login.token)
       })
       .catch(e => setError(e))
   }
@@ -88,9 +90,9 @@ export default function Box() {
   const SubmitForm = (e) => {
     e.preventDefault()
     User()
-    console.log(">>", state)
+    // console.log(">>", Token)
     if (state) {
-      Router.push('/home')
+      // Router.push('/home')
     }
   }
 

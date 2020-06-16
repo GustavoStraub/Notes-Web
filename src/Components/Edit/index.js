@@ -32,6 +32,7 @@ img{
   position: absolute;
   top: 10px;
   right: 10px;
+  cursor: pointer;
 }
 input{
   background: #121212;

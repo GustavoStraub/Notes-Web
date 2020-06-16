@@ -106,7 +106,7 @@ export default function index() {
       <Form>
         <img src="./img/close.png" onClick={() => setShowNew(false)} />
         <input type="text" placeholder="Title" onChange={e => setTitle(e.target.value)} required />
-        <textarea type="text" onChange={e => setDesc(e.target.value)} />
+        <textarea type="text" onChange={e => setDesc(e.target.value)} required/>
         <button onClick={SubmitForm}>Save</button>
       </Form>
     </Main>

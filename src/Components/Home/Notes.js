@@ -62,7 +62,7 @@ export default function Notes() {
       variables: {
         id: "" + ID
       },
-      pollInterval: 3000,
+      pollInterval: 2000,
     })
 
     if (loading) {
@@ -74,7 +74,15 @@ export default function Notes() {
     let Notes = data.User.notes
 
     if (Notes.length == 0) {
-      return <Main><Wrapper>Create Note</Wrapper></Main>
+      return (<Main>
+        <Wrapper>
+          <div>Notes:</div>
+          <div style={{ fontStyle: 'italic', cursor: 'pointer' }} onClick={() => setShowNew(true)}>
+            Create new Note +
+            </div>
+        </Wrapper>
+      </Main>
+      )
     }
     console.log(Note)
 
@@ -87,7 +95,7 @@ export default function Notes() {
       <Main>
         <Wrapper>
           <div>Notes:</div>
-          <div onClick={() => setShowNew(true)}>Create new Note +</div>
+          <div style={{ fontStyle: 'italic' }} onClick={() => setShowNew(true)}>Create new Note +</div>
           {Notes.map(note =>
             (<div onClick={() => IDshow(note.id)} key={note.id}>
               <p>{note.title}</p>

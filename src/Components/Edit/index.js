@@ -20,6 +20,7 @@ flex-direction: column;
 background: rgba(0,0,0,0.6)
 `
 const Form = styled.div`
+border-radius: 5px;
 position: relative;
 display: flex;
 justify-content: center;
@@ -123,7 +124,6 @@ export default function index(props) {
       return <div></div>
     }
     let Data = data.Note
-
 
 
     return (

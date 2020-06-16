@@ -6,6 +6,7 @@ import styled from 'styled-components'
 import Edit from '../Edit'
 import { Router } from 'next/router'
 import { ShowContext } from '../Context/Show'
+import { NewShowContext } from '../Context/NewShowContext'
 
 const Main = styled.div`
 color: rgba(255,255,255,0.9);
@@ -50,6 +51,7 @@ export default function Notes() {
 
   const [Show, setShow] = useContext(ShowContext)
   const [Token, setToken] = useContext(TokenContext)
+  const [showNew, setShowNew] = useContext(NewShowContext)
   const [Note, setNote] = useState('')
 
   let ID
@@ -71,7 +73,7 @@ export default function Notes() {
     let Notes = data.User.notes
 
     if (Notes.length == 0) {
-      return <div>Create Note</div>
+      return <Main><Wrapper>Create Note</Wrapper></Main>
     }
     console.log(Note)
 
@@ -84,11 +86,11 @@ export default function Notes() {
       <Main>
         <Wrapper>
           <div>Notes:</div>
+          <div onClick={setShowNew(true)}>Create new Note +</div>
           {Notes.map(note =>
-            (
-              <div onClick={() => IDshow(note.id)} key={note.id}>
-                <p >{note.title}</p>
-              </div>
+            (<div onClick={() => IDshow(note.id)} key={note.id}>
+              <p>{note.title}</p>
+            </div>
             ))}
         </Wrapper>
       </Main>

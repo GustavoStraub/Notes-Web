@@ -39,7 +39,11 @@ div{
   :first-child{
     cursor: auto;
   }
+
 }
+`
+const Options = styled.div`
+
 `
 
 export default function Notes() {
@@ -84,7 +88,6 @@ export default function Notes() {
             (
               <div onClick={() => IDshow(note.id)} key={note.id}>
                 <p >{note.title}</p>
-                
               </div>
             ))}
         </Wrapper>

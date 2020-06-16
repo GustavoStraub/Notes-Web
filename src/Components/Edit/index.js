@@ -3,6 +3,7 @@ import styled from 'styled-components'
 import { useMutation, useQuery } from 'react-apollo'
 import EditNote from '../../Graphql/EditNote'
 import Note from '../../Graphql/Note'
+import DeleteNote from '../../Graphql/DeleteNote'
 import { ShowContext } from '../Context/Show'
 
 
@@ -18,7 +19,7 @@ align-content: center;
 flex-direction: column;
 background: rgba(0,0,0,0.6)
 `
-const Form = styled.form`
+const Form = styled.div`
 position: relative;
 display: flex;
 justify-content: center;
@@ -83,8 +84,18 @@ export default function index(props) {
   const [Show, setShow] = useContext(ShowContext)
   const [NoteData, data2] = useMutation(EditNote)
 
+  function DeleteHandler(e) {
+    e.preventDefault()
+    NoteInfo({
+      variables: {
+        id: props.id
+      }
+    })
+    setShow(false)
+  }
   const [Title, setTitle] = useState()
   const [Desc, setDesc] = useState()
+  const [NoteInfo, data3] = useMutation(DeleteNote)
 
   function SubmitForm(e) {
     e.preventDefault()
@@ -111,13 +122,17 @@ export default function index(props) {
       return <div></div>
     }
     let Data = data.Note
+
+
+
     return (
       <Main>
-        <Form onSubmit={SubmitForm}>
+        <Form>
           <img src="./img/close.png" onClick={() => setShow(false)} />
           <input type="text" defaultValue={Data.title} onChange={e => setTitle(e.target.value)} />
           <textarea type="text" defaultValue={Data.note} onChange={e => setDesc(e.target.value)} />
-          <button>Update</button>
+          <button onClick={SubmitForm}>Update</button>
+          <button onClick={DeleteHandler}>Delete</button>
         </Form>
       </Main>
     )

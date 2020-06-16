@@ -7,6 +7,7 @@ const User = gql`
       notes{
         id
         title
+        note
       }
     }
   }

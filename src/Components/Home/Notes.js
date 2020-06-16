@@ -5,6 +5,7 @@ import { TokenContext } from '../Context/Token'
 import styled from 'styled-components'
 import Edit from '../Edit'
 import { Router } from 'next/router'
+import { ShowContext } from '../Context/Show'
 
 const Main = styled.div`
 color: rgba(255,255,255,0.9);
@@ -43,6 +44,7 @@ div{
 
 export default function Notes() {
 
+  const [Show, setShow] = useContext(ShowContext)
   const [Token, setToken] = useContext(TokenContext)
   const [Note, setNote] = useState('')
 
@@ -53,7 +55,7 @@ export default function Notes() {
       variables: {
         id: "" + ID
       },
-      pollInterval: 1000,
+      pollInterval: 3000,
     })
 
     if (loading) {
@@ -69,15 +71,22 @@ export default function Notes() {
     }
     console.log(Note)
 
+    function IDshow(id) {
+      setShow(true)
+      setNote(id)
+    }
+
     return (
       <Main>
         <Wrapper>
           <div>Notes:</div>
-          {Notes.map(note => (
-            <div onClick={() =>{setNote(note.id)}} key={note.id}>
-              <p>{note.title}</p>
-            </div>
-          ))}
+          {Notes.map(note =>
+            (
+              <div onClick={() => IDshow(note.id)} key={note.id}>
+                <p >{note.title}</p>
+                
+              </div>
+            ))}
         </Wrapper>
       </Main>
     )
@@ -86,6 +95,7 @@ export default function Notes() {
   return (
     <div>
       {GetNotes()}
+      {Show ? <Edit id={Note} /> : <div />}
     </div>
   )
 }

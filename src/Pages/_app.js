@@ -3,6 +3,8 @@ import React from 'react'
 import ApolloClient from 'apollo-boost';
 import { ApolloProvider } from '@apollo/react-hooks';
 import TokenContext from '../Components/Context/Token'
+import ShowContext from '../Components/Context/Show'
+import Show from '../Components/Context/Show';
 
 const client = new ApolloClient({
   uri: 'http://localhost:4001/',
@@ -15,7 +17,9 @@ export default class MyApp extends App {
       <ApolloProvider client={client}>
         <title>Notes</title>
         <TokenContext>
-          <Component {...pageProps} />
+          <ShowContext>
+            <Component {...pageProps} />
+          </ShowContext>
         </TokenContext>
       </ApolloProvider>
     )

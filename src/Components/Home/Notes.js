@@ -7,6 +7,7 @@ import Edit from '../Edit'
 import { Router } from 'next/router'
 import { ShowContext } from '../Context/Show'
 import { NewShowContext } from '../Context/NewShowContext'
+import CreateNote from '../CreateNote'
 
 const Main = styled.div`
 color: rgba(255,255,255,0.9);
@@ -86,7 +87,7 @@ export default function Notes() {
       <Main>
         <Wrapper>
           <div>Notes:</div>
-          <div onClick={setShowNew(true)}>Create new Note +</div>
+          <div onClick={() => setShowNew(true)}>Create new Note +</div>
           {Notes.map(note =>
             (<div onClick={() => IDshow(note.id)} key={note.id}>
               <p>{note.title}</p>
@@ -101,6 +102,7 @@ export default function Notes() {
     <div>
       {GetNotes()}
       {Show ? <Edit id={Note} /> : <div />}
+      {showNew ? <CreateNote /> : <div />}
     </div>
   )
 }

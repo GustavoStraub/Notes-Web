@@ -1,7 +1,9 @@
 import React, { useState, useContext } from 'react'
 import styled from 'styled-components'
 import { useMutation } from 'react-apollo'
-import NewShowContext from '../Context/NewShowContext'
+import { NewShowContext } from '../Context/NewShowContext'
+import { TokenContext } from '../Context/Token'
+import AddNote from '../../Graphql/AddUser'
 
 const Main = styled.div`
 position: absolute;
@@ -80,18 +82,32 @@ outline: none;
 `
 
 export default function index(props) {
+  const [NoteData, { error }] = useMutation(AddNote)
 
+  const [showNew, setShowNew] = useContext(NewShowContext)
+  const [Token, setToken] = useContext(TokenContext)
   const [Title, setTitle] = useState('')
   const [Desc, setDesc] = useState('')
+
+  function SubmitForm(e) {
+    e.preventDefault()
+    NoteData({
+      variables: {
+        title: Title,
+        note: Desc,
+        userId: Token.id
+      }
+    })
+    setShowNew(false)
+  }
 
   return (
     <Main>
       <Form>
-        <img src="./img/close.png" onClick={() => setShow(false)} />
-        <input type="text" onChange={e => setTitle(e.target.value)} />
+        <img src="./img/close.png" onClick={() => setShowNew(false)} />
+        <input type="text" placeholder="Title" onChange={e => setTitle(e.target.value)} required />
         <textarea type="text" onChange={e => setDesc(e.target.value)} />
-        <button onClick={SubmitForm}>Update</button>
-        <button onClick={DeleteHandler}>Delete</button>
+        <button onClick={SubmitForm}>Save</button>
       </Form>
     </Main>
   )

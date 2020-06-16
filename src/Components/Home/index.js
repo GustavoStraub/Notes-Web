@@ -8,7 +8,6 @@ export default function index() {
     <div>
       <UserIsLogged />
       <Header />
-      HOME
       <Notes />
     </div>
   )

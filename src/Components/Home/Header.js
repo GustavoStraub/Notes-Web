@@ -9,6 +9,7 @@ align-items: center;
 justify-content: space-between;
 padding: 15px;
 background: #333232;
+margin-bottom: 3vh;
 `
 const Using = styled.div`
 color: rgba(255,255,255,0.7);

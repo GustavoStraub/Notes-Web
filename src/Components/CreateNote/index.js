@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import { useMutation } from 'react-apollo'
 import { NewShowContext } from '../Context/NewShowContext'
 import { TokenContext } from '../Context/Token'
-import AddNote from '../../Graphql/AddUser'
+import AddNote from '../../Graphql/AddNote'
 
 const Main = styled.div`
 position: absolute;
@@ -81,7 +81,7 @@ outline: none;
 }
 `
 
-export default function index(props) {
+export default function index() {
   const [NoteData, { error }] = useMutation(AddNote)
 
   const [showNew, setShowNew] = useContext(NewShowContext)

@@ -8,6 +8,8 @@
 
 - Then you need to link an mongodb database to the .env file
 
+- When everything is set up run ```yarn dev``` or ```npm dev``` to start the project
+
 ### Technologies used:
 - React, Apollo Client, styled-components and Next.js
 

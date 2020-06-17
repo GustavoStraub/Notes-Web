@@ -80,7 +80,12 @@ font-family: "Museo-300";
 cursor: pointer;
 border: 2px solid #4d4175;
 outline: none;
+margin-bottom: 5px;
+:last-child{
+  margin: 0;
 }
+}
+
 `
 export default function index(props) {
   const [Show, setShow] = useContext(ShowContext)

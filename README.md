@@ -8,4 +8,7 @@
 
 - Then you need to link an mongodb database to the .env file
 
+### Technologies used:
+- React, Apollo Client, styled-components and Next.js
+
 >Have fun!

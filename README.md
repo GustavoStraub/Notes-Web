@@ -6,8 +6,6 @@
 
 - After that, you need to run the command ```yarn``` to install the dependencies
 
-- Then you need to link an mongodb database to the .env file
-
 - When everything is set up run ```yarn dev``` to start the project
 
 ### Technologies used:

@@ -80,13 +80,17 @@ border: 2px solid #4d4175;
 outline: none;
 }
 `
+const Error = styled.span`
+color: #c73434;
+margin-bottom: 2%;
+`
 
 export default function index() {
-  const [NoteData, { error }] = useMutation(AddNote)
+  const [NoteData, { error }] = useMutation(AddNote, { errorPolicy: 'all' })
 
   const [showNew, setShowNew] = useContext(NewShowContext)
   const [Token, setToken] = useContext(TokenContext)
-  const [Title, setTitle] = useState('')
+  const [Title, setTitle] = useState()
   const [Desc, setDesc] = useState('')
 
   function SubmitForm(e) {
@@ -105,6 +109,8 @@ export default function index() {
     <Main>
       <Form>
         <img src="./img/close.png" onClick={() => setShowNew(false)} />
+        {error && error.graphQLErrors.map(({ message }, i) => (
+        <Error key={i}>{message}*</Error>))}
         <input type="text" placeholder="Title" onChange={e => setTitle(e.target.value)} required />
         <textarea type="text" onChange={e => setDesc(e.target.value)} required/>
         <button onClick={SubmitForm}>Save</button>

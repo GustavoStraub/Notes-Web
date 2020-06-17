@@ -50,7 +50,7 @@ export default function Header() {
         Logged as: <span>{Token ? Token.name : ''}</span>
       </Using>
       <LogOut>
-        <button onClick={LogOutHandler}>LogOut</button>
+        <button onClick={LogOutHandler}>Logout</button>
       </LogOut>
     </Wrapper>
   )

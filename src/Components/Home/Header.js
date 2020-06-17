@@ -1,7 +1,9 @@
 import React, { useContext } from 'react'
 import styled from 'styled-components'
+import { useMutation } from 'react-apollo'
 import { TokenContext } from '../Context/Token'
 import Router from 'next/router'
+import DeleteUser from '../../Graphql/DeleteUser'
 
 const Wrapper = styled.div`
 display: flex;
@@ -32,16 +34,30 @@ button{
   border: 2px solid #4d4175;
   outline: none;
   background: #121212;
+  :last-child{
+    margin-left: 5px;
+    color: rgba(255,0,0, 0.8)
+  }
 }
 `
 
 
 export default function Header() {
   const [Token, setToken] = useContext(TokenContext)
+  const [UserData, { error }] = useMutation(DeleteUser)
 
   const LogOutHandler = () => {
     setToken()
     Router.push('/login')
+  }
+
+  const Delete = async () => {
+    UserData({
+      variables: {
+        id: Token.id
+      }
+    })
+    LogOutHandler()
   }
 
   return (
@@ -51,6 +67,7 @@ export default function Header() {
       </Using>
       <LogOut>
         <button onClick={LogOutHandler}>Logout</button>
+        <button onClick={Delete}>Delete User</button>
       </LogOut>
     </Wrapper>
   )

@@ -7,7 +7,7 @@ import ShowContext from '../Components/Context/Show'
 import NewShowContext from '../Components/Context/NewShowContext'
 
 const client = new ApolloClient({
-  uri: 'http://localhost:4001/',
+  uri: 'https://notes-application-backend.herokuapp.com/',
 });
 
 export default class MyApp extends App {

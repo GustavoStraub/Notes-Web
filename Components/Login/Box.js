@@ -13,6 +13,9 @@ flex-direction: column;
 padding: 2% 5%;
 justify-content: center;
 align-items: center;
+@media only screen and (max-width: 768px) {
+  width: 80%;
+}
 `
 const Title = styled.h2`
 color: rgba(255,255,255,0.8);
@@ -37,6 +40,9 @@ padding: 10px 20px;
 width: 300px;
 margin-bottom: 5%;
 border: 1px solid #333232;
+@media only screen and (max-width: 768px) {
+  width: 200px;
+}
 :focus{
   border-color: #4d4175;
 }

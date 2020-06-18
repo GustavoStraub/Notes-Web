@@ -18,6 +18,7 @@ justify-content: center;
 align-content: center;
 flex-direction: column;
 background: rgba(0,0,0,0.6)
+
 `
 const Form = styled.div`
 border-radius: 5px;
@@ -29,6 +30,10 @@ flex-direction: column;
 background: #333232;
 padding: 30px;
 align-self: center;
+@media only screen and (max-width: 768px) {
+  width: 80%;
+  height: 70vh;
+}
 img{
   position: absolute;
   top: 10px;
@@ -47,6 +52,9 @@ padding: 10px 20px;
 width: 300px;
 margin-bottom: 5%;
 border: 1px solid #333232;
+@media only screen and (max-width: 768px) {
+  width: 250px;
+}
 :focus{
   border-color: #4d4175;
 }
@@ -64,6 +72,9 @@ textarea{
   border: 1px solid #333232;
   resize: none;
   height: 400px;
+  @media only screen and (max-width: 768px) {
+    width: 250px;
+  }
   :focus{
     border-color: #4d4175;
   }
@@ -85,7 +96,6 @@ margin-bottom: 5px;
   margin: 0;
 }
 }
-
 `
 export default function index(props) {
   const [Show, setShow] = useContext(ShowContext)

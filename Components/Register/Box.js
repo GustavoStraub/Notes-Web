@@ -36,6 +36,9 @@ padding: 10px 20px;
 width: 300px;
 margin-bottom: 5%;
 border: 1px solid #333232;
+@media only screen and (max-width: 768px) {
+  width: 200px;
+}
 :focus{
   border-color: #4d4175;
 }

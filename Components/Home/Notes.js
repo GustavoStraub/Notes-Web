@@ -26,6 +26,9 @@ align-items: center;
 background: #333232;
 border: 2px solid #4d4175;
 flex-direction: column;
+@media only screen and (max-width: 768px) {
+  width: 80%;
+}
 div{
   cursor: pointer;
   color: rgba(255,255,255,0.9);

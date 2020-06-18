@@ -11,4 +11,7 @@
 ### Technologies used:
 - React, Apollo Client, styled-components and Next.js
 
+### Check this application!
+- https://notes-application-frontend.herokuapp.com/
+
 >Have fun!

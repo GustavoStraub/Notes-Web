@@ -97,7 +97,7 @@ export default function Box() {
         <Input onChange={e => setPassword(e.target.value)} type="password" placeholder="Password" required />
         <Button type="submit">Create Account</Button>
       </Form>
-      <P onClick={() => Router.push('/login')}>Has an account? Login here</P>
+      <P onClick={() => Router.push('/login')}>Have an account? Login here</P>
     </Wrapper>
   )
 }
